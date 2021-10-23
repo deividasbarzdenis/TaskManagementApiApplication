@@ -18,12 +18,22 @@ public class Task {
     private Long Id;
     private String name;
     private String description;
-    private String group;
+
+    @Column(name="task_group")
+    private String taskGroup;
+
+    @Enumerated(value = EnumType.STRING)
     private Status status;
-    private User assignee;
+
+    @OneToOne(cascade = CascadeType.ALL)
     private TimeSpent timeSpent;
 
-    private Task parentTask;
+    @ManyToOne
+    private Task task;
+
+    @OneToMany(mappedBy="task")
     private Set<Task> subTasks;
 
+    @ManyToOne
+    private User assignee;
 }

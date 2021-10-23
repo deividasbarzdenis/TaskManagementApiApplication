@@ -1,7 +1,7 @@
 package lt.debarz.taskmanagementapi.user.model;
 
 import lombok.*;
-import lt.debarz.specialistqueueapp.queue.model.Queue;
+import lt.debarz.taskmanagementapi.task.model.Task;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -44,13 +44,8 @@ public class User implements UserDetails {
 
     private String phone;
 
-    @Column(nullable = false)
-    @NotBlank
-    @Size(min=3, max=254)
-    private String speciality;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<Queue> clients = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assignee")
+    private Set<Task> tasks = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -64,9 +59,9 @@ public class User implements UserDetails {
         roles.add(role);
     }
 
-    public User addQueue(Queue queue){
-        queue.setUser(this);
-        this.clients.add(queue);
+    public User addTask(Task task){
+        task.setAssignee(this);
+        this.tasks.add(task);
         return this;
     }
 
