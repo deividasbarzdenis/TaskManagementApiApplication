@@ -4,7 +4,10 @@ import lombok.*;
 import lt.debarz.taskmanagementapi.user.model.User;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 @Getter
 @Setter
@@ -12,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
+@Table(name = "task")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +29,40 @@ public class Task {
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy="task")
+    @PrimaryKeyJoinColumn
     private TimeSpent timeSpent;
 
     @ManyToOne
     private Task task;
 
     @OneToMany(mappedBy="task")
-    private Set<Task> subTasks;
+    private List<Task> subTasks = new ArrayList<>();
 
     @ManyToOne
     private User assignee;
+
+    public void setTimeSpent(TimeSpent timeSpent) {
+        if (timeSpent != null) {
+            this.timeSpent = timeSpent;
+            timeSpent.setTask(this);
+        }
+    }
+    public Task addTask(Task subTask){
+        subTask.setTask(this);
+        this.subTasks.add(subTask);
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", taskGroup='" + taskGroup + '\'' +
+                ", subTasks=" + subTasks +
+                ", startTime=" + timeSpent.getStartTime() +
+                ", endTime=" + timeSpent.getEndTime() +
+                '}';
+    }
 }

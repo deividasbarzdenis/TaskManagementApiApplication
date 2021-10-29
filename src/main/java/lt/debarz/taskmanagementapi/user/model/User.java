@@ -8,9 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -45,7 +43,7 @@ public class User implements UserDetails {
     private String phone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "assignee")
-    private Set<Task> tasks = new HashSet<>();
+    private List<Task> tasks = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
