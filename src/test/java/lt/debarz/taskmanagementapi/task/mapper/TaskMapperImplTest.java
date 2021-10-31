@@ -42,7 +42,7 @@ class TaskMapperImplTest {
 
         task.addTask(task1);
 
-        TaskDto taskDto = taskMapperImpl.convertEntityToDto(task, 1, 10);
+        TaskDto taskDto = taskMapperImpl.convertEntityToDto(task);
 
         assertEquals(taskDto.getId(), task.getId());
         assertEquals(taskDto.getName(), task.getName());

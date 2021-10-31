@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class TaskMapperImpl implements TaskMapper {
 
     @Override
-    public TaskDto convertEntityToDto(Task task, int pageNumber, int pageSize) {
+    public TaskDto convertEntityToDto(Task task) {
         if (task == null) {
             return null;
         }
@@ -52,14 +52,6 @@ public class TaskMapperImpl implements TaskMapper {
                 }).collect(Collectors.toList()));
         return task;
     }
-
-//    public List<TaskDto> convertSubTasktoDto(Task task, int pageNumber, int pageSize) {
-//        Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by("name").ascending());
-//        return taskRepository.findAllSubTasks(task, page)
-//                .stream()
-//                .map(this::convertEntityToDto)
-//                .collect(Collectors.toList());
-//    }
 
 
     private TimeSpent addSpentTime(TaskDto taskDto) throws ParseException {

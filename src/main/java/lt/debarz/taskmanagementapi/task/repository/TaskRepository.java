@@ -1,5 +1,6 @@
 package lt.debarz.taskmanagementapi.task.repository;
 
+import lt.debarz.taskmanagementapi.task.model.Status;
 import lt.debarz.taskmanagementapi.task.model.Task;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,22 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    @Query("SELECT '*' FROM Task u WHERE u.Id = task_id")
-    List<Task> findAllSubTasks(@Param("task") Task task, Pageable pageable);
+
+    @Query("SELECT '*' FROM Task u WHERE u.Id = :taskId")
+    List<Task> findAllSubTasksByTaskId(@Param("taskId") long taskId, Pageable pageable);
+
+    Task findTaskByName(String name);
+
+    List<Task> findAllByStatus(Status status);
+
+    List<Task> findAllByDescription(String description);
+
+    List<Task> findAllByTaskGroup(String group);
+
+    @Query("SELECT '*' FROM Task u WHERE u.assignee.id = :assigneeId")
+    List<Task> getAllByAssignee(@Param("assigneeId") long assigneeId);
+
+    // Todo: get "Done" task time spent dto have to have one more attribute
+    // Todo: get all "Done" tasks with time spent on task
+
 }

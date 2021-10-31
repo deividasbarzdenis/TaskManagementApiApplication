@@ -12,7 +12,6 @@ public interface TaskMapper {
 
     TaskMapper TASK_MAPPER = Mappers.getMapper(TaskMapper.class);
 
-    TaskDto convertEntityToDto(Task task, int pageNumber, int pageSize);
-    //TaskDto convertEntityToDto(Task task);
+    TaskDto convertEntityToDto(Task task);
     Task convertDtoToEntity(TaskDto taskDto) throws ParseException;
 }

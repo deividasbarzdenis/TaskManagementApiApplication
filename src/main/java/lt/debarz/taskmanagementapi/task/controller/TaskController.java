@@ -2,7 +2,7 @@ package lt.debarz.taskmanagementapi.task.controller;
 
 import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.task.dto.TaskDto;
-import lt.debarz.taskmanagementapi.task.model.Task;
+import lt.debarz.taskmanagementapi.task.model.Status;
 import lt.debarz.taskmanagementapi.task.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +23,63 @@ public class TaskController {
      * Get all tasks
      */
     @GetMapping
-    public List<Task> getAllTasks() {
+    public List<TaskDto> getAllTasks() {
         return taskService.getAllTasks();
     }
+
     /**
      * Save task data to DB and
      */
     @PostMapping
-    public ResponseEntity<TaskDto> addClientToQueue(@RequestBody @Valid TaskDto taskDto) throws ParseException {
+    public ResponseEntity<TaskDto> saveTask(@RequestBody @Valid TaskDto taskDto) throws ParseException {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(taskService.saveTask(taskDto));
     }
 
+    /**
+     * Get task data
+     */
+    @GetMapping("/{id}")
+    public TaskDto getTask(@PathVariable long id) {
+        return taskService.getTaskById(id);
+    }
+    /**
+     * Delete task data from DB
+     */
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTask(@PathVariable long id){
+        taskService.deleteTask(id);
+    }
+    /**
+     * Update task data
+     */
+    @PostMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public TaskDto updateTask(@RequestBody @Valid TaskDto taskDto) {
+        return taskService.updateTask(taskDto);
+    }
+    /**
+     * Get tasks by user
+     */
+    @GetMapping("/user/tasks")
+    public List<TaskDto> getTasksByUser(){
+        return taskService.getTasksByUserId();
+    }
+    /**
+     * Get sub-tasks by task id
+     */
+    //neveikia del query parametro
+    @GetMapping("subTasks/{taskId}/{pageNumber}/{pageSize}")
+    public List<TaskDto> getAllSubTasksByMainTaskId(@PathVariable long taskId, @PathVariable int pageNumber, @PathVariable int pageSize){
+        return taskService.findAllSubTasksById(taskId, pageNumber, pageSize);
+    }
+
+    /**
+     * Get tasks by status
+     */
+    @GetMapping("/status/{status}")
+    public List<TaskDto> getAllTasksByStatus(@PathVariable("status") Status status){
+        return taskService.findAllTasksByStatus(status);
+    }
 }
