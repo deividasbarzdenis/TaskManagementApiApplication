@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @RestController
@@ -23,7 +24,7 @@ public class TaskController {
      * Get all tasks
      */
     @GetMapping
-    public List<TaskDto> getAllTasks() {
+    public Set<TaskDto> getAllTasks() {
         return taskService.getAllTasks();
     }
 
@@ -54,7 +55,7 @@ public class TaskController {
     /**
      * Update task data
      */
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public TaskDto updateTask(@RequestBody @Valid TaskDto taskDto) {
         return taskService.updateTask(taskDto);
@@ -69,7 +70,6 @@ public class TaskController {
     /**
      * Get sub-tasks by task id
      */
-    //neveikia del query parametro
     @GetMapping("subTasks/{taskId}/{pageNumber}/{pageSize}")
     public List<TaskDto> getAllSubTasksByMainTaskId(@PathVariable long taskId, @PathVariable int pageNumber, @PathVariable int pageSize){
         return taskService.findAllSubTasksById(taskId, pageNumber, pageSize);

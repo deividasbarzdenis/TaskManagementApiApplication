@@ -8,11 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Set;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-    @Query("SELECT '*' FROM Task u WHERE u.Id = :taskId")
-    List<Task> findAllSubTasksByTaskId(@Param("taskId") long taskId, Pageable pageable);
+    @Query("SELECT u FROM Task u WHERE u.task.Id = :id")
+    List<Task> findAllSubTasksByTaskId(@Param("id") long taskId, Pageable pageable);
+
+    @Query("SELECT u FROM Task u WHERE u.task.Id is null")
+    Set<Task> findAllTasksWhereTaskIDIsNull();
 
     Task findTaskByName(String name);
 

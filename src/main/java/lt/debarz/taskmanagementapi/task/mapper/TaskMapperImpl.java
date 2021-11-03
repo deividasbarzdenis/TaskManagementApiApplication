@@ -28,7 +28,7 @@ public class TaskMapperImpl implements TaskMapper {
                 .endTime(task.getTimeSpent().getEndTime())
                 .subTasks(task.getSubTasks().stream()
                         .map(this::getTaskDto)
-                        .collect(Collectors.toList()))
+                        .collect(Collectors.toSet()))
                 .build();
 
     }
@@ -49,7 +49,7 @@ public class TaskMapperImpl implements TaskMapper {
                 e.printStackTrace();
             }
                     return null;
-                }).collect(Collectors.toList()));
+                }).collect(Collectors.toSet()));
         return task;
     }
 

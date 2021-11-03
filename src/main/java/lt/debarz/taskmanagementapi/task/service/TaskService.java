@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -31,12 +32,12 @@ public class TaskService {
     /**
      * Get all tasks from repo and covert to dto:
      */
-    public List<TaskDto> getAllTasks() {
+    public Set<TaskDto> getAllTasks() {
         return taskRepository
-                .findAll()
+                .findAllTasksWhereTaskIDIsNull()
                 .stream()
                 .map(taskMapper::convertEntityToDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     /**
@@ -119,4 +120,6 @@ public class TaskService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
     }
+    // store task in Map<>:
+
 }

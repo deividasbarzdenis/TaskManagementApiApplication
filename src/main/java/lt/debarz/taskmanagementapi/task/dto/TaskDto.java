@@ -1,12 +1,12 @@
 package lt.debarz.taskmanagementapi.task.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,7 +21,8 @@ public class TaskDto {
     private String taskGroup;
     private String status;
 
-    private List<TaskDto> subTasks  = new ArrayList<>();
+
+    private Set<TaskDto> subTasks  = new HashSet<>();
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -30,6 +31,11 @@ public class TaskDto {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
+
+
+    public Set<TaskDto> getSubTasks() {
+        return subTasks;
+    }
 
     @Override
     public String toString() {

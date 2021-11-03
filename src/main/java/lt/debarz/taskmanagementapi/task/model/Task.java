@@ -1,12 +1,16 @@
 package lt.debarz.taskmanagementapi.task.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import lt.debarz.taskmanagementapi.user.model.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 
 @Getter
@@ -36,11 +40,17 @@ public class Task {
     @ManyToOne
     private Task task;
 
+
     @OneToMany(mappedBy="task")
-    private List<Task> subTasks = new ArrayList<>();
+    private Set<Task> subTasks = new HashSet<>();
 
     @ManyToOne
     private User assignee;
+
+
+    public Set<Task> getSubTasks() {
+        return subTasks;
+    }
 
     public void setTimeSpent(TimeSpent timeSpent) {
         if (timeSpent != null) {
