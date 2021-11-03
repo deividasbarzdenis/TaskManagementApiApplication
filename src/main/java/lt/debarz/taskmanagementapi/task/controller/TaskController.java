@@ -61,6 +61,14 @@ public class TaskController {
         return taskService.updateTask(taskDto);
     }
     /**
+     * Update part of the task data
+     */
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public TaskDto patchTask(@RequestBody @Valid TaskDto taskDto) throws ParseException {
+        return taskService.patchTask(taskDto);
+    }
+    /**
      * Get tasks by user
      */
     @GetMapping("/user/tasks")
