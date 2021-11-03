@@ -81,6 +81,19 @@ public class TaskService {
         return taskDto;
     }
     /**
+     * Partial task update
+     */
+    public TaskDto patchTask(TaskDto taskDto) throws ParseException {
+        Long id = taskDto.getId();
+        if (id == null) {
+            throw new EntityNotFoundException(id);
+        }
+        Task task = getById(id);
+        Task savedTask = taskMapper.convertPartOfDtoToEntity(taskDto, task);
+        taskRepository.save(savedTask);
+        return taskDto;
+    }
+    /**
      * get tasks by user
      */
     public List<TaskDto> getTasksByUserId() {

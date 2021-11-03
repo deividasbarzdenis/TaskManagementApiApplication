@@ -14,4 +14,5 @@ public interface TaskMapper {
 
     TaskDto convertEntityToDto(Task task);
     Task convertDtoToEntity(TaskDto taskDto) throws ParseException;
+    Task convertPartOfDtoToEntity(TaskDto taskDto, Task task) throws ParseException;
 }

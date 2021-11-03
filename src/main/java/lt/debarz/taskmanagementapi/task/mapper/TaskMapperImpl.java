@@ -53,6 +53,26 @@ public class TaskMapperImpl implements TaskMapper {
         return task;
     }
 
+    @Override
+    public Task convertPartOfDtoToEntity(TaskDto taskDto, Task task) throws ParseException {
+        if(taskDto.getName() != null){
+            task.setName(taskDto.getName());
+        }
+        if(taskDto.getDescription() != null){
+            task.setDescription(taskDto.getDescription());
+        }
+        if(taskDto.getTaskGroup() != null){
+            task.setTaskGroup(taskDto.getTaskGroup());
+        }
+        if(taskDto.getStatus() != null){
+            task.setStatus(Status.valueOf(taskDto.getStatus()));
+        }
+        if(taskDto.getStatus() != null && taskDto.getStatus().equals("Done")){
+            task.setTimeSpent(addSpentTime(taskDto));
+        }
+        return task;
+    }
+
 
     private TimeSpent addSpentTime(TaskDto taskDto) throws ParseException {
         TimeSpent timeSpent = new TimeSpent();
