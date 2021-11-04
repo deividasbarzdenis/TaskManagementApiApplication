@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(SWAGGER_URLS).permitAll()
-                .antMatchers("/login", "/api/signup", "api/queues/clients/0", "/api/queues/**").permitAll()
+                .antMatchers("/login", "/api/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
