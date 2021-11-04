@@ -32,7 +32,6 @@
 --     task_group VARCHAR(250),
 --     assignee_id INTEGER,
 --     task_id INTEGER,
---     time_spent_id INTEGER,
 --     PRIMARY KEY (id),
 --     FOREIGN KEY (assignee_id) references  user (id),
 --     FOREIGN KEY (task_id) references task (id)

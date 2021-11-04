@@ -1,15 +1,10 @@
 package lt.debarz.taskmanagementapi.task.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.*;
 import lt.debarz.taskmanagementapi.user.model.User;
-
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -39,7 +34,6 @@ public class Task {
 
     @ManyToOne
     private Task task;
-
 
     @OneToMany(mappedBy="task")
     private Set<Task> subTasks = new HashSet<>();

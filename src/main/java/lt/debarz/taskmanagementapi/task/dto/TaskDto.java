@@ -32,6 +32,9 @@ public class TaskDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
+    @JsonFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private Date taskCompletionTime;
 
     public Set<TaskDto> getSubTasks() {
         return subTasks;

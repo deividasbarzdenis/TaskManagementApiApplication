@@ -18,6 +18,14 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     @Query("SELECT u FROM Task u WHERE u.task.Id is null")
     Set<Task> findAllTasksWhereTaskIDIsNull();
 
+    @Query("SELECT u " +
+            "FROM Task " +
+            "u JOIN TimeSpent s " +
+            "ON u.Id = :id " +
+            "AND s.task.Id = :id " +
+            "where u.status = 'Done'")
+    Task getTimeSpentOnTask(@Param("id") long taskI);
+
     Task findTaskByName(String name);
 
     List<Task> findAllByStatus(Status status);
@@ -28,8 +36,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Query("SELECT '*' FROM Task u WHERE u.assignee.id = :assigneeId")
     List<Task> getAllByAssignee(@Param("assigneeId") long assigneeId);
-
-    // Todo: get "Done" task time spent dto have to have one more attribute
-    // Todo: get all "Done" tasks with time spent on task
 
 }

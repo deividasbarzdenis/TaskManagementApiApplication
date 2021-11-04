@@ -23,9 +23,11 @@ VALUES (1, 1),
        (5, 1);
 INSERT INTO TASK (id, description, name, status, task_group, assignee_id, task_id)
 VALUES (1, 'example', 'example', 'Open', 'example', 1, NULL),
-       (2, 'example1', 'example1', 'Open', 'example1', 1, 1);
+       (2, 'example1', 'example1', 'Open', 'example1', 1, 1),
+    (3, 'example2', 'example2', 'Done', 'example2', 1, NULL);
 
 INSERT INTO TIME_SPENT (task_id, end_time, start_time)
 VALUES ( 1, '-1-11-28 00:00:00', '2021-10-26 11:54:27' ),
-       (2, '-1-11-28 00:00:00', '2021-10-26 11:56:23');
+       (2, '-1-11-28 00:00:00', '2021-10-26 11:56:23'),
+       (3, '2021-10-27 12:53:12', '2021-10-26 11:56:23');
 

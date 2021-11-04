@@ -41,7 +41,7 @@ public class TaskController {
      * Get task data
      */
     @GetMapping("/{id}")
-    public TaskDto getTask(@PathVariable long id) {
+    public TaskDto getTask(@PathVariable long id) throws ParseException {
         return taskService.getTaskById(id);
     }
     /**
@@ -79,7 +79,8 @@ public class TaskController {
      * Get sub-tasks by task id
      */
     @GetMapping("subTasks/{taskId}/{pageNumber}/{pageSize}")
-    public List<TaskDto> getAllSubTasksByMainTaskId(@PathVariable long taskId, @PathVariable int pageNumber, @PathVariable int pageSize){
+    public List<TaskDto> getAllSubTasksByMainTaskId(@PathVariable long taskId, @PathVariable int pageNumber,
+                                                    @PathVariable int pageSize){
         return taskService.findAllSubTasksById(taskId, pageNumber, pageSize);
     }
 
@@ -89,5 +90,12 @@ public class TaskController {
     @GetMapping("/status/{status}")
     public List<TaskDto> getAllTasksByStatus(@PathVariable("status") Status status){
         return taskService.findAllTasksByStatus(status);
+    }
+    /**
+     *  Get task total completion time  with all data
+     * */
+    @GetMapping("/totalTime/{id}")
+    public TaskDto getTaskWithTimeSpentOnTask(@PathVariable long id){
+        return taskService.getTimeSpentOnTask(id);
     }
 }

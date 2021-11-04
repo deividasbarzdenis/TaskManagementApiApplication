@@ -26,6 +26,7 @@ public class TaskMapperImpl implements TaskMapper {
                 .status(task.getStatus().name())
                 .startTime(task.getTimeSpent().getStartTime())
                 .endTime(task.getTimeSpent().getEndTime())
+                .taskCompletionTime(task.getTimeSpent().getTaskCompletionTime())
                 .subTasks(task.getSubTasks().stream()
                         .map(this::getTaskDto)
                         .collect(Collectors.toSet()))

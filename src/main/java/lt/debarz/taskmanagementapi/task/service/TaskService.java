@@ -121,7 +121,19 @@ public class TaskService {
                 .map(taskMapper::convertEntityToDto)
                 .collect(Collectors.toList());
     }
-    // Todo: get done tasks with time spent
+    /**
+     * Get task completion time HH:mm:ss
+     */
+    public TaskDto getTimeSpentOnTask(long id){
+        if (!taskRepository.existsById(id)) {
+            throw new EntityNotFoundException(id);
+        }
+        Task task = taskRepository.getTimeSpentOnTask(id);
+        if(!task.getStatus().name().equals("Done")){
+            throw new EntityNotFoundException(id);
+        }
+        return taskMapper.convertEntityToDto(task);
+    }
     // Todo: findTaskByName
     // Todo: findAllByDescription
     //Todo: findAllByTaskGroup
@@ -133,6 +145,5 @@ public class TaskService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
     }
-    // store task in Map<>:
 
 }
