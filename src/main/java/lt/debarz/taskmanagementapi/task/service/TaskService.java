@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+// Todo: findTaskByName
+// Todo: findAllByDescription
+// Todo: findAllByTaskGroup
 @AllArgsConstructor
 @Service
 public class TaskService {
@@ -134,10 +137,6 @@ public class TaskService {
         }
         return taskMapper.convertEntityToDto(task);
     }
-    // Todo: findTaskByName
-    // Todo: findAllByDescription
-    //Todo: findAllByTaskGroup
-
 
     //private getById task method
     private Task getById(long id) {
