@@ -1,10 +1,10 @@
-#1. Introduction
+# 1. Introduction
 This is a Spring made Task Management API Web Service. Main works include:
 
 Used Spring framework to support "Task Management API" search, listing, update, delete and more (dependency injection, inversion of control, REST API, etc.).
 Implemented security workflow via in-memory H2 database and JWT authentication provided by Spring Security.
 Utilized Hibernate, Spring JPA to provide better support of database operations.
-#2. Requirements
+# 2. Requirements
 The technologies used in this app are as follows:
 
 1. Spring Boot 2.5.5
@@ -17,7 +17,7 @@ The technologies used in this app are as follows:
 8. Swagger 2.9.2
 9. Json web token JWT: 0.11.2
 10. Spring Security: 5.5.2
-#Project Structure
+# Project Structure
 Create the folders we'll need for implementing project. We'll have two main packages inside `debarz.taskmanagementapi` package.
 This main packages are `task` and `user`. Each package have  own smaller packages according too functionality.
 - `config` package: includes configuration classes.
@@ -35,7 +35,7 @@ for basic CRUD operations and also API for pagination and sorting.
 - `security` package: includes security classes. These classes implement functionality of app security  
 ![img.png](img.png)
 
-#Data Model of App
+# Data Model of App
 The following diagram is the Entity Relationship Diagram of the app design:
 ![img_1.png](img_1.png)
 - User can have many roles. Ordinary role it 'user', but user can have 'user', 'admin' and more implemented roles.
@@ -43,7 +43,7 @@ The following diagram is the Entity Relationship Diagram of the app design:
 - Task table have @OneToMany recursive relation with self for creating sub_tasks and @OneToOne relation with TimeSpent table.
 - Later improvement: group table, relation @OneToMany with User table. User can belong group that can create group tasks.
 
-#Installation
+# Installation
 Running the Application Run Spring boot:
 1. `mvn clean spring-boot:run`
 2. Security details example: 
@@ -61,12 +61,12 @@ Running the Application Run Spring boot:
 - In the TaskManagementApiApplication.class annotation @SpringBootApplication(exclude = { SecurityAutoConfiguration.class }) 
 5. Documentation API (Swagger) by accessing
 - `http://localhost:8080/swagger-ui.html`
-#H2 Console
+# H2 Console
 - `http://localhost:8080/h2`  
 - `jdbc:h2:mem:taskApp`
 - username: `user`
 - password: `password`
-#Later App Improvement
+# Later App Improvement
 - Implement Spring Data Rest for automatic repository-based REST endpoints
 - Implement `RestTample` to consume REST API
 - -Navigating hypermedia APIs with Traverson
