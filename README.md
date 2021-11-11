@@ -32,8 +32,9 @@ class that is marked (annotated) as having the ability to represent objects in t
 - `repository` package: includes repository interfaces that extends JPA repository. it contains API 
 for basic CRUD operations and also API for pagination and sorting.
 - `service` package: includes services classes, it is app functionality classes.
-- `security` package: includes security classes. These classes implement functionality of app security  
-![img.png](img.png)
+- `security` package: includes security classes. These classes implement functionality of app security     
+  
+- ![img.png](img.png)
 
 # Data Model of App
 The following diagram is the Entity Relationship Diagram of the app design:
