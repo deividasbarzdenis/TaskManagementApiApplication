@@ -3,6 +3,8 @@ package lt.debarz.taskmanagementapi.task.model;
 
 import lombok.*;
 import lt.debarz.taskmanagementapi.user.model.User;
+import org.springframework.data.rest.core.annotation.RestResource;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +17,7 @@ import java.util.Set;
 @Builder
 @Entity
 @Table(name = "task")
+@RestResource(rel="tasks", path="tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

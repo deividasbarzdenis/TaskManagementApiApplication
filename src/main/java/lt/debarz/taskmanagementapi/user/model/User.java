@@ -2,6 +2,7 @@ package lt.debarz.taskmanagementapi.user.model;
 
 import lombok.*;
 import lt.debarz.taskmanagementapi.task.model.Task;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +20,7 @@ import java.util.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @RestResource(exported = false)
     private Long id;
 
     @Column(unique = true, nullable = false)
@@ -35,11 +37,14 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @NotBlank
     @Size(min=3, max=254)
+    @RestResource(exported = false)
     private String password;
 
     @Size(min=3, max=254)
+    @RestResource(exported = false)
     private String email;
 
+    @RestResource(exported = false)
     private String phone;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "assignee")
@@ -51,6 +56,7 @@ public class User implements UserDetails {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") }
     )
+    @RestResource(exported = false)
     private Set<Role> roles= new HashSet<>();
 
     public void addRole(Role role){
