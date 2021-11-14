@@ -46,7 +46,7 @@ public class UserController {
         return userService.updateUser(userDto);
     }
 
-    @DeleteMapping("/api/users/{id}")
+    @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable long id){
         userService.deleteUser(id);

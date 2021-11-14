@@ -1,6 +1,7 @@
 package lt.debarz.taskmanagementapi.task.projection;
 
 import lt.debarz.taskmanagementapi.task.model.Task;
+import lt.debarz.taskmanagementapi.task.model.TimeSpent;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.util.Set;
@@ -13,7 +14,7 @@ public interface TaskView {
     String getDescription();
     String getTaskGroup();
     String getStatus();
-
+    TimeSpent getTimeSpent();
     Set<Task> subTasks();
 
 }

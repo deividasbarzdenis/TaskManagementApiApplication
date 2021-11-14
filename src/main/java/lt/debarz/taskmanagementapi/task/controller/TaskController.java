@@ -22,54 +22,6 @@ public class TaskController {
     private final TaskService taskService;
 
     /**
-     * Get all tasks
-     */
-//    @GetMapping
-//    public Set<TaskDto> getAllTasks() {
-//        return taskService.getAllTasks();
-//    }
-
-    /**
-     * Save task data to DB and
-     */
-//    @PostMapping
-//    public ResponseEntity<TaskDto> saveTask(@RequestBody @Valid TaskDto taskDto) throws ParseException {
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .body(taskService.saveTask(taskDto));
-//    }
-
-    /**
-     * Get task data
-     */
-//    @GetMapping("/{id}")
-//    public TaskDto getTask(@PathVariable long id) throws ParseException {
-//        return taskService.getTaskById(id);
-//    }
-    /**
-     * Delete task data from DB
-     */
-//    @DeleteMapping("/{id}")
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void deleteTask(@PathVariable long id){
-//        taskService.deleteTask(id);
-//    }
-    /**
-     * Update task data
-     */
-//    @PutMapping("/{id}")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
-//    public TaskDto updateTask(@RequestBody @Valid TaskDto taskDto) {
-//        return taskService.updateTask(taskDto);
-//    }
-    /**
-     * Update part of the task data
-     */
-//    @PatchMapping("/{id}")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
-//    public TaskDto patchTask(@RequestBody @Valid TaskDto taskDto) throws ParseException {
-//        return taskService.patchTask(taskDto);
-//    }
-    /**
      * Get tasks by user
      */
     @GetMapping("/user/tasks")

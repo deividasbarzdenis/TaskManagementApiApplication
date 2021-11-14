@@ -1,5 +1,6 @@
 package lt.debarz.taskmanagementapi.user.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lt.debarz.taskmanagementapi.task.model.Task;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -20,7 +21,6 @@ import java.util.*;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @RestResource(exported = false)
     private Long id;
 
     @Column(unique = true, nullable = false)
@@ -37,11 +37,10 @@ public class User implements UserDetails {
     @Column(nullable = false)
     @NotBlank
     @Size(min=3, max=254)
-    @RestResource(exported = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Size(min=3, max=254)
-    @RestResource(exported = false)
     private String email;
 
     @RestResource(exported = false)
@@ -56,7 +55,7 @@ public class User implements UserDetails {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") }
     )
-    @RestResource(exported = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Set<Role> roles= new HashSet<>();
 
     public void addRole(Role role){
