@@ -7,6 +7,7 @@ import lt.debarz.taskmanagementapi.user.model.User;
 import lt.debarz.taskmanagementapi.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,11 +26,14 @@ public class UserController {
     }
 
     @GetMapping("/api/users/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public UserDto getUser(@PathVariable long id) {
         return userService.getUserById(id);
     }
 
+
     @GetMapping("/api/users")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public List<UserDto> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -41,12 +45,14 @@ public class UserController {
     }
 
     @PostMapping("/api/users/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public UserDto updateUser(@RequestBody @Valid UserDto userDto) {
         return userService.updateUser(userDto);
     }
 
     @DeleteMapping("/users/{id}")
+    @PreAuthorize("hasRole('ROLE_USER')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable long id){
         userService.deleteUser(id);
