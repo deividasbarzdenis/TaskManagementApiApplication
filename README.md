@@ -1,7 +1,8 @@
 # 1. Introduction
 This is a Spring made Task Management API Web Service. Main works include:
 
-Used Spring framework to support "Task Management API" search, listing, update, delete and more (dependency injection, inversion of control, REST API, etc.).
+Branch "SpringDataRest" in project included Spring data rest implementation for CRUD operations. 
+Used Spring framework data rest to support "Task Management API" search, listing, update, delete and more (dependency injection, inversion of control, REST API, etc.).
 Implemented security workflow via in-memory H2 database and JWT authentication provided by Spring Security.
 Utilized Hibernate, Spring JPA to provide better support of database operations.
 # 2. Requirements
@@ -9,14 +10,15 @@ The technologies used in this app are as follows:
 
 1. Spring Boot 2.5.5
 2. Spring Data JPA 2.5.5
-3. Hibernate 5.4.32
-4. H2 Database 2.14.2
-5. Maven 3.8.1
-6. Lombok 1.18.2
-7. Java 1.8.0_251
-8. Swagger 2.9.2
-9. Json web token JWT: 0.11.2
-10. Spring Security: 5.5.2
+3. Spring Data Rest 2.5.5
+4. Hibernate 5.4.32
+5. H2 Database 2.14.2
+6. Maven 3.8.1
+7. Lombok 1.18.2
+8. Java 1.8.0_251
+9. Swagger 2.9.2
+10. Json web token JWT: 0.11.2
+11. Spring Security: 5.5.2
 # Project Structure
 Create the folders we'll need for implementing project. We'll have two main packages inside `debarz.taskmanagementapi` package.
 This main packages are `task` and `user`. Each package have  own smaller packages according too functionality.
@@ -27,14 +29,15 @@ to the defined request handler method.
 and send it from one subsystem of an application to another.
 - `exception` package: includes exception classes. It is for send message in response that object was not found in database. 
 - `mapper` package: includes mapper classes. It is for map entity to dto or vice versa.
-- `entity` package: includes entities classes. Entity class is a POJO (Plain Old Java Object) class, i.e. an ordinary 
+- `model` package: includes entities classes. Entity class is a POJO (Plain Old Java Object) class, i.e. an ordinary 
 class that is marked (annotated) as having the ability to represent objects in the database.
+- `projection` package: includes projection interfaces for projecting only a selected fields from an entity representation. 
 - `repository` package: includes repository interfaces that extends JPA repository. it contains API 
 for basic CRUD operations and also API for pagination and sorting.
 - `service` package: includes services classes, it is app functionality classes.
 - `security` package: includes security classes. These classes implement functionality of app security     
   
-- ![img.png](img.png)
+- ![img_2.png](img_2.png)
 
 # Data Model of App
 The following diagram is the Entity Relationship Diagram of the app design:
@@ -68,6 +71,5 @@ Running the Application Run Spring boot:
 - username: `user`
 - password: `password`
 # Later App Improvement
-- Implement Spring Data Rest for automatic repository-based REST endpoints
 - Implement `RestTample` to consume REST API
 - -Navigating hypermedia APIs with Traverson
