@@ -5,15 +5,12 @@ import lt.debarz.taskmanagementapi.task.dto.TaskDto;
 import lt.debarz.taskmanagementapi.task.model.Status;
 import lt.debarz.taskmanagementapi.task.service.TaskService;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.text.ParseException;
+
 import java.util.List;
-import java.util.Set;
+
 
 @AllArgsConstructor
 @RepositoryRestController

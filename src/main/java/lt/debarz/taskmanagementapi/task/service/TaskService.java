@@ -8,7 +8,6 @@ import lt.debarz.taskmanagementapi.task.model.Status;
 import lt.debarz.taskmanagementapi.task.model.Task;
 import lt.debarz.taskmanagementapi.task.repository.TaskRepository;
 import lt.debarz.taskmanagementapi.user.model.User;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,9 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 // Todo: findTaskByName
