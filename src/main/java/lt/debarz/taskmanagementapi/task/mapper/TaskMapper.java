@@ -1,7 +1,7 @@
 package lt.debarz.taskmanagementapi.task.mapper;
 
 import lt.debarz.taskmanagementapi.task.dto.TaskDto;
-import lt.debarz.taskmanagementapi.task.model.Task;
+import lt.debarz.taskmanagementapi.task.entity.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

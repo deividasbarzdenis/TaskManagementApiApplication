@@ -2,12 +2,11 @@ package lt.debarz.taskmanagementapi.user.mapper;
 
 import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.task.mapper.TaskMapperImpl;
-import lt.debarz.taskmanagementapi.task.model.Task;
+import lt.debarz.taskmanagementapi.task.entity.Task;
 import lt.debarz.taskmanagementapi.user.dto.UserDto;
 import lt.debarz.taskmanagementapi.user.model.Role;
 import lt.debarz.taskmanagementapi.user.model.User;
 import lt.debarz.taskmanagementapi.user.repository.RoleRepository;
-import lt.debarz.taskmanagementapi.user.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

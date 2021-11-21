@@ -1,7 +1,7 @@
 package lt.debarz.taskmanagementapi.task.repository;
 
-import lt.debarz.taskmanagementapi.task.model.Status;
-import lt.debarz.taskmanagementapi.task.model.Task;
+import lt.debarz.taskmanagementapi.task.entity.Status;
+import lt.debarz.taskmanagementapi.task.entity.Task;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

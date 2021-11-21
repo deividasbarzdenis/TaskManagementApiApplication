@@ -1,4 +1,4 @@
-package lt.debarz.taskmanagementapi.task.model;
+package lt.debarz.taskmanagementapi.task.entity;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

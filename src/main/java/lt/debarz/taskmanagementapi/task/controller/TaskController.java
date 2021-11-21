@@ -2,7 +2,7 @@ package lt.debarz.taskmanagementapi.task.controller;
 
 import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.task.dto.TaskDto;
-import lt.debarz.taskmanagementapi.task.model.Status;
+import lt.debarz.taskmanagementapi.task.entity.Status;
 import lt.debarz.taskmanagementapi.task.service.TaskService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

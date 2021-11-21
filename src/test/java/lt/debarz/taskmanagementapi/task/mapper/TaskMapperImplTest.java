@@ -1,9 +1,9 @@
 package lt.debarz.taskmanagementapi.task.mapper;
 
 import lt.debarz.taskmanagementapi.task.dto.TaskDto;
-import lt.debarz.taskmanagementapi.task.model.Status;
-import lt.debarz.taskmanagementapi.task.model.Task;
-import lt.debarz.taskmanagementapi.task.model.TimeSpent;
+import lt.debarz.taskmanagementapi.task.entity.Status;
+import lt.debarz.taskmanagementapi.task.entity.Task;
+import lt.debarz.taskmanagementapi.task.entity.TimeSpent;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;

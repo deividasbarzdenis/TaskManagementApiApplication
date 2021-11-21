@@ -1,7 +1,7 @@
 package lt.debarz.taskmanagementapi.user.model;
 
 import lombok.*;
-import lt.debarz.taskmanagementapi.task.model.Task;
+import lt.debarz.taskmanagementapi.task.entity.Task;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
