@@ -3,7 +3,10 @@ package lt.debarz.taskmanagementapi.task.controller;
 import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.task.dto.TaskDto;
 import lt.debarz.taskmanagementapi.task.entity.Status;
+import lt.debarz.taskmanagementapi.task.model.TaskModel;
 import lt.debarz.taskmanagementapi.task.service.TaskService;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +15,9 @@ import javax.validation.Valid;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Set;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @AllArgsConstructor
 @RestController
@@ -97,5 +103,14 @@ public class TaskController {
     @GetMapping("/totalTime/{id}")
     public TaskDto getTaskWithTimeSpentOnTask(@PathVariable long id){
         return taskService.getTimeSpentOnTask(id);
+    }
+
+    //--> HATEOAS <--//
+    @GetMapping(path="/recent", produces="application/hal+json")
+    public ResponseEntity<CollectionModel<TaskModel>> recentTask(){
+        List<TaskModel> taskModels = taskService.getTaskModels();
+        CollectionModel<TaskModel> tasksCollection = CollectionModel.of(taskModels,
+                linkTo(methodOn(TaskController.class).recentTask()).withRel("recent"));
+        return new ResponseEntity<>(tasksCollection, HttpStatus.OK);
     }
 }

@@ -6,6 +6,8 @@ import lt.debarz.taskmanagementapi.task.exception.EntityNotFoundException;
 import lt.debarz.taskmanagementapi.task.mapper.TaskMapperImpl;
 import lt.debarz.taskmanagementapi.task.entity.Status;
 import lt.debarz.taskmanagementapi.task.entity.Task;
+import lt.debarz.taskmanagementapi.task.model.TaskModel;
+import lt.debarz.taskmanagementapi.task.model.TaskModelAssembler;
 import lt.debarz.taskmanagementapi.task.repository.TaskRepository;
 import lt.debarz.taskmanagementapi.user.model.User;
 import org.springframework.beans.BeanUtils;
@@ -143,6 +145,15 @@ public class TaskService {
         return taskRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(id));
+    }
+
+    //---> HATEOAS <---//
+    public List<TaskModel> getTaskModels(){
+        PageRequest page = PageRequest.of(0, 12);
+        List<Task> tasks = taskRepository.findAllTasksWhereTaskIDIsNull(page).getContent();
+                return tasks.stream()
+                        .map(task -> new TaskModelAssembler().toModel(task))
+                        .collect(Collectors.toList());
     }
 
 }
