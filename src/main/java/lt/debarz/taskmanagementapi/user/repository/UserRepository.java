@@ -1,7 +1,7 @@
 package lt.debarz.taskmanagementapi.user.repository;
 
 
-import lt.debarz.taskmanagementapi.user.model.User;
+import lt.debarz.taskmanagementapi.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

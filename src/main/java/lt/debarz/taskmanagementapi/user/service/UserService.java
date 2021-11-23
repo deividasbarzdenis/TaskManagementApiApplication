@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.user.dto.UserDto;
 import lt.debarz.taskmanagementapi.user.exception.EntityNotFoundException;
 import lt.debarz.taskmanagementapi.user.mapper.UserMapper;
-import lt.debarz.taskmanagementapi.user.model.User;
+import lt.debarz.taskmanagementapi.user.entity.User;
 import lt.debarz.taskmanagementapi.user.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.userdetails.UserDetailsService;

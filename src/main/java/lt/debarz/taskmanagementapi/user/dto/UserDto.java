@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.debarz.taskmanagementapi.task.dto.TaskDto;
-import lt.debarz.taskmanagementapi.user.model.Role;
-import lt.debarz.taskmanagementapi.user.model.User;
+import lt.debarz.taskmanagementapi.user.entity.Role;
+import lt.debarz.taskmanagementapi.user.entity.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

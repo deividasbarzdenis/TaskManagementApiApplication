@@ -9,7 +9,7 @@ import lt.debarz.taskmanagementapi.task.entity.Task;
 import lt.debarz.taskmanagementapi.task.model.TaskModel;
 import lt.debarz.taskmanagementapi.task.model.TaskModelAssembler;
 import lt.debarz.taskmanagementapi.task.repository.TaskRepository;
-import lt.debarz.taskmanagementapi.user.model.User;
+import lt.debarz.taskmanagementapi.user.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -150,7 +150,7 @@ public class TaskService {
     //---> HATEOAS <---//
     public List<TaskModel> getTaskModels(){
         PageRequest page = PageRequest.of(0, 12);
-        List<Task> tasks = taskRepository.findAllTasksWhereTaskIDIsNull(page).getContent();
+        List<Task> tasks = taskRepository.findAllTasksWhereTaskIDIsNullWithPage(page).getContent();
                 return tasks.stream()
                         .map(task -> new TaskModelAssembler().toModel(task))
                         .collect(Collectors.toList());

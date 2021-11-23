@@ -1,4 +1,4 @@
-package lt.debarz.taskmanagementapi.user.model;
+package lt.debarz.taskmanagementapi.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

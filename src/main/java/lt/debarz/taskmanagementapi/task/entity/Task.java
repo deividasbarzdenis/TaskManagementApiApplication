@@ -2,7 +2,7 @@ package lt.debarz.taskmanagementapi.task.entity;
 
 
 import lombok.*;
-import lt.debarz.taskmanagementapi.user.model.User;
+import lt.debarz.taskmanagementapi.user.entity.User;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;

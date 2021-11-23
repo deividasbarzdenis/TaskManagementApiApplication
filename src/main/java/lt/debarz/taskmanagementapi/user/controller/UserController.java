@@ -3,7 +3,7 @@ package lt.debarz.taskmanagementapi.user.controller;
 
 import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.user.dto.UserDto;
-import lt.debarz.taskmanagementapi.user.model.User;
+import lt.debarz.taskmanagementapi.user.entity.User;
 import lt.debarz.taskmanagementapi.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package lt.debarz.taskmanagementapi.user.repository;
 
 
-import lt.debarz.taskmanagementapi.user.model.Role;
+import lt.debarz.taskmanagementapi.user.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

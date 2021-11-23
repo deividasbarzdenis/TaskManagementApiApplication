@@ -1,4 +1,4 @@
-package lt.debarz.taskmanagementapi.user.model;
+package lt.debarz.taskmanagementapi.user.entity;
 
 import lombok.*;
 import lt.debarz.taskmanagementapi.task.entity.Task;

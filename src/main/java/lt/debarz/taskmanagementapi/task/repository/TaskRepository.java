@@ -20,7 +20,7 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     Set<Task> findAllTasksWhereTaskIDIsNull();
 
     @Query("SELECT u FROM Task u WHERE u.task.Id is null")
-    Page<Task> findAllTasksWhereTaskIDIsNull(Pageable page);
+    Page<Task> findAllTasksWhereTaskIDIsNullWithPage(Pageable page);
 
     @Query("SELECT u " +
             "FROM Task " +
