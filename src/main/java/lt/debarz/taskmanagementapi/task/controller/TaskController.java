@@ -20,7 +20,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @AllArgsConstructor
-@RestController
+@RepositoryRestController
 @RequestMapping("/api/tasks")
 public class TaskController {
 
