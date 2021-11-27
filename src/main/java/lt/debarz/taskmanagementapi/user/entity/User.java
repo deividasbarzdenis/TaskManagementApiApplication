@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 import lt.debarz.taskmanagementapi.task.entity.Task;
 import lt.debarz.taskmanagementapi.user.model.View;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -19,6 +20,7 @@ import java.util.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@RestResource(rel = "users", path = "users")
 public class User implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lt.debarz.taskmanagementapi.user.model.View;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.security.core.GrantedAuthority;
 
 
@@ -18,6 +19,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
+@RestResource(rel = "roles", path = "roles")
 public class Role implements GrantedAuthority, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

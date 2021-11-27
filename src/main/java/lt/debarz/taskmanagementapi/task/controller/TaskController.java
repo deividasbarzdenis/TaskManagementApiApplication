@@ -1,116 +1,88 @@
 package lt.debarz.taskmanagementapi.task.controller;
 
 import lombok.AllArgsConstructor;
-import lt.debarz.taskmanagementapi.task.dto.TaskDto;
 import lt.debarz.taskmanagementapi.task.entity.Status;
 import lt.debarz.taskmanagementapi.task.model.TaskModel;
 import lt.debarz.taskmanagementapi.task.service.TaskService;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.text.ParseException;
 import java.util.List;
-import java.util.Set;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @AllArgsConstructor
 @RepositoryRestController
-@RequestMapping("/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;
 
     /**
-     * Get all tasks
-     */
-    @GetMapping
-    public Set<TaskDto> getAllTasks() {
-        return taskService.getAllTasks();
-    }
-
-    /**
-     * Save task data to DB and
-     */
-    @PostMapping
-    public ResponseEntity<TaskDto> saveTask(@RequestBody @Valid TaskDto taskDto) throws ParseException {
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(taskService.saveTask(taskDto));
-    }
-
-    /**
-     * Get task data
-     */
-    @GetMapping("/{id}")
-    public TaskDto getTask(@PathVariable long id) throws ParseException {
-        return taskService.getTaskById(id);
-    }
-    /**
-     * Delete task data from DB
-     */
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteTask(@PathVariable long id){
-        taskService.deleteTask(id);
-    }
-    /**
-     * Update task data
-     */
-    @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public TaskDto updateTask(@RequestBody @Valid TaskDto taskDto) {
-        return taskService.updateTask(taskDto);
-    }
-    /**
-     * Update part of the task data
-     */
-    @PatchMapping("/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public TaskDto patchTask(@RequestBody @Valid TaskDto taskDto) throws ParseException {
-        return taskService.patchTask(taskDto);
-    }
-    /**
      * Get tasks by user
      */
-    @GetMapping("/user/tasks")
-    public List<TaskDto> getTasksByUser(){
-        return taskService.getTasksByUserId();
+    @GetMapping(path = "/userTasks", produces = "application/hal+json")
+    public ResponseEntity<CollectionModel<TaskModel>> getTasksByUser() {
+        List<TaskModel> taskModels = taskService.getTasksByUserId();
+        CollectionModel<TaskModel> tasksCollection = CollectionModel.of(taskModels,
+                linkTo(methodOn(TaskController.class)
+                        .getTasksByUser())
+                        .withRel("userTasks"));
+        return new ResponseEntity<>(tasksCollection, HttpStatus.OK);
     }
+
     /**
      * Get sub-tasks by task id
      */
-    @GetMapping("subTasks/{taskId}/{pageNumber}/{pageSize}")
-    public List<TaskDto> getAllSubTasksByMainTaskId(@PathVariable long taskId, @PathVariable int pageNumber,
-                                                    @PathVariable int pageSize){
-        return taskService.findAllSubTasksById(taskId, pageNumber, pageSize);
+    @GetMapping(path ="subTasks/{taskId}/{pageNumber}/{pageSize}", produces = "application/hal+json")
+    public ResponseEntity<CollectionModel<TaskModel>> getAllSubTasksByMainTaskId(@PathVariable long taskId,
+                                                                                 @PathVariable int pageNumber,
+                                                                                 @PathVariable int pageSize) {
+        List<TaskModel> taskModels = taskService.findAllSubTasksById(taskId, pageNumber, pageSize);
+        CollectionModel<TaskModel> tasksCollection = CollectionModel.of(taskModels,
+                linkTo(methodOn(TaskController.class)
+                        .getAllSubTasksByMainTaskId(taskId, pageNumber, pageSize))
+                        .withRel("subTasks/{taskId}/{pageNumber}/{pageSize}"));
+        return new ResponseEntity<>(tasksCollection, HttpStatus.OK);
     }
 
     /**
      * Get tasks by status
      */
-    @GetMapping("/status/{status}")
-    public List<TaskDto> getAllTasksByStatus(@PathVariable("status") Status status){
-        return taskService.findAllTasksByStatus(status);
-    }
-    /**
-     *  Get task total completion time  with all data
-     * */
-    @GetMapping("/totalTime/{id}")
-    public TaskDto getTaskWithTimeSpentOnTask(@PathVariable long id){
-        return taskService.getTimeSpentOnTask(id);
+    @GetMapping(path ="/status/{status}", produces = "application/hal+json")
+    public ResponseEntity<CollectionModel<TaskModel>> getAllTasksByStatus(@PathVariable("status") Status status) {
+        List<TaskModel> taskModels = taskService.findAllTasksByStatus(status);
+        CollectionModel<TaskModel> tasksCollection = CollectionModel.of(taskModels,
+                linkTo(methodOn(TaskController.class)
+                        .getAllTasksByStatus(status))
+                        .withRel("/status/{status}"));
+        return new ResponseEntity<>(tasksCollection, HttpStatus.OK);
     }
 
-    //--> HATEOAS <--//
-    @GetMapping(path="/recent", produces="application/hal+json")
-    public ResponseEntity<CollectionModel<TaskModel>> recentTask(){
+    /**
+     * Get task total completion time  with all data
+     */
+    @GetMapping(path ="/totalTime/{id}", produces = "application/hal+json")
+    public ResponseEntity<EntityModel<TaskModel>> getTaskWithTimeSpentOnTask(@PathVariable long id) {
+        TaskModel taskModel = taskService.getTimeSpentOnTask(id);
+        EntityModel<TaskModel> model = EntityModel.of(taskModel, linkTo(methodOn(TaskController.class)
+                .getTaskWithTimeSpentOnTask(id))
+                .withRel("/totalTime/{id}"));
+        return new ResponseEntity<>(model, HttpStatus.OK);
+    }
+
+    /**
+     * Get all task with pages
+     */
+    @GetMapping(path = "/allTasks", produces = "application/hal+json")
+    public ResponseEntity<CollectionModel<TaskModel>> getTaskModelsWithPages() {
         List<TaskModel> taskModels = taskService.getTaskModels();
         CollectionModel<TaskModel> tasksCollection = CollectionModel.of(taskModels,
-                linkTo(methodOn(TaskController.class).recentTask()).withRel("recent"));
+                linkTo(methodOn(TaskController.class).getTaskModelsWithPages()).withRel("allTasks"));
         return new ResponseEntity<>(tasksCollection, HttpStatus.OK);
     }
 }
