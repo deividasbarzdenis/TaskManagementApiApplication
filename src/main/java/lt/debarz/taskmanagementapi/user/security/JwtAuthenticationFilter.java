@@ -29,8 +29,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                    JwtProvider jwtProvider) {
         super(authenticationManager);
         this.jwtProvider = jwtProvider;
+        setFilterProcessesUrl("/api/login");
     }
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {

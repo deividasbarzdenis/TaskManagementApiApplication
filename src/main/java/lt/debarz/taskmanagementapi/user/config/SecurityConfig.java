@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
+
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -39,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(SWAGGER_URLS).permitAll()
-                .antMatchers("/api-data/login", "/api-data/signup").permitAll()
+                .antMatchers("/api/login", "/api/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling()
@@ -65,6 +66,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         auth.userDetailsService(userService).passwordEncoder(encoder());
     }
+
+//    @Bean
+//    public JwtAuthenticationFilter getJWTAuthenticationFilter() throws Exception {
+//        final JwtAuthenticationFilter filter = new JwtAuthenticationFilter(authenticationManager());
+//        filter.setFilterProcessesUrl("/api/login");
+//        return filter;
+//    }
 
     @Bean
     public PasswordEncoder encoder() {

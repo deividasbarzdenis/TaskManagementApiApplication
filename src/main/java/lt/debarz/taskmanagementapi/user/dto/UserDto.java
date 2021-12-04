@@ -4,15 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lt.debarz.taskmanagementapi.task.dto.TaskDto;
 import lt.debarz.taskmanagementapi.user.entity.Role;
 import lt.debarz.taskmanagementapi.user.entity.User;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -43,8 +40,6 @@ public class UserDto {
     private String phone;
 
     private Set<String> roles = new HashSet<>();
-
-    private List<TaskDto> tasks = new ArrayList<>();
 
     //response after successful login
     public UserDto(User user) {

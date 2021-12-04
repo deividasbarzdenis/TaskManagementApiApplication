@@ -1,6 +1,5 @@
 package lt.debarz.taskmanagementapi.task.mapper;
 
-import lt.debarz.taskmanagementapi.task.dto.TaskDto;
 import lt.debarz.taskmanagementapi.task.entity.Status;
 import lt.debarz.taskmanagementapi.task.entity.Task;
 import lt.debarz.taskmanagementapi.task.entity.TimeSpent;
@@ -8,10 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class TaskMapperImplTest {
-    private final TaskMapperImpl taskMapperImpl = new TaskMapperImpl();
 
     @Test
     public void testToEntity() throws ParseException {
@@ -42,16 +38,6 @@ class TaskMapperImplTest {
 
         task.addTask(task1);
 
-        TaskDto taskDto = taskMapperImpl.convertEntityToDto(task);
-
-        assertEquals(taskDto.getId(), task.getId());
-        assertEquals(taskDto.getName(), task.getName());
-        assertEquals(taskDto.getDescription(), task.getDescription());
-        assertEquals(taskDto.getTaskGroup(), task.getTaskGroup());
-        assertEquals(taskDto.getStatus(), task.getStatus().name());
-        assertEquals(taskDto.getStartTime(), task.getTimeSpent().getStartTime());
-        assertEquals(taskDto.getEndTime(), task.getTimeSpent().getEndTime());
-        assertEquals(taskDto.getSubTasks().toString(), task.getSubTasks().toString());
 
     }
 

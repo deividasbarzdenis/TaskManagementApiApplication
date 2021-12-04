@@ -1,12 +1,17 @@
 package lt.debarz.taskmanagementapi.user.service;
 
 import lombok.AllArgsConstructor;
+import lt.debarz.taskmanagementapi.task.model.TaskModel;
+import lt.debarz.taskmanagementapi.task.model.TaskModelAssembler;
+import lt.debarz.taskmanagementapi.task.repository.TaskRepository;
 import lt.debarz.taskmanagementapi.user.dto.UserDto;
 import lt.debarz.taskmanagementapi.user.exception.EntityNotFoundException;
 import lt.debarz.taskmanagementapi.user.mapper.UserMapper;
 import lt.debarz.taskmanagementapi.user.entity.User;
 import lt.debarz.taskmanagementapi.user.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -19,54 +24,64 @@ import java.util.stream.Collectors;
 public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
+    private TaskRepository taskRepository;
     private UserMapper userMapper;
 
-    public UserDto createUser(UserDto userDto){
-        User user = userMapper.convertUserDtoToUserEntity(userDto);
-        User saveUser = userRepository.save(user);
-        userDto.setId(saveUser.getId());
-        return userDto;
-    }
-
-    public UserDto getUserById(long id) {
-        User user = getById(id);
-        return userMapper.convertUserToDTO(user);
-    }
-
-    public List<UserDto> getAllUsers() {
-        return userRepository.findAll()
-                .stream()
-                .map(user -> userMapper.convertUserToDTO(user))
+//    public UserDto createUser(UserDto userDto){
+//        User user = userMapper.convertUserDtoToUserEntity(userDto);
+//        User saveUser = userRepository.save(user);
+//        userDto.setId(saveUser.getId());
+//        return userDto;
+//    }
+//
+//    public UserDto getUserById(long id) {
+//        User user = getById(id);
+//        return userMapper.convertUserToDTO(user);
+//    }
+//
+//    public List<UserDto> getAllUsers() {
+//        return userRepository.findAll()
+//                .stream()
+//                .map(user -> userMapper.convertUserToDTO(user))
+//                .collect(Collectors.toList());
+//    }
+//
+//    public UserDto updateUser(UserDto userDto) {
+//        Long id = userDto.getId();
+//        if(id == null){
+//            throw new EntityNotFoundException(id);
+//        }
+//        User user = getById(id);
+//        userMapper.convertUserDtoToUserEntity(userDto);
+//        BeanUtils.copyProperties(userDto, user);
+//        userRepository.save(user);
+//        return userDto;
+//    }
+//
+//    public void deleteUser(long id) {
+//        if(!userRepository.existsById(id)){
+//            throw new EntityNotFoundException(id);
+//        }
+//        userRepository.deleteById(id);
+//    }
+    /**
+     * Get all user tasks by user Id
+    * */
+    public List<TaskModel> getAllUserTasks(long userId){
+        return taskRepository.getAllByAssignee(userId).stream()
+                .map(task -> new TaskModelAssembler().toModel(task))
                 .collect(Collectors.toList());
     }
 
-    public UserDto updateUser(UserDto userDto) {
-        Long id = userDto.getId();
-        if(id == null){
-            throw new EntityNotFoundException(id);
-        }
-        User user = getById(id);
-        userMapper.convertUserDtoToUserEntity(userDto);
-        BeanUtils.copyProperties(userDto, user);
-        userRepository.save(user);
-        return userDto;
-    }
-
-    public void deleteUser(long id) {
-        if(!userRepository.existsById(id)){
-            throw new EntityNotFoundException(id);
-        }
-        userRepository.deleteById(id);
-    }
-
+    //Needed for spring security
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findWithRolesByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found."));
     }
 
-    private User getById(long id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(id));
-    }
+//    private User getById(long id) {
+//        return userRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException(id));
+//    }
 }

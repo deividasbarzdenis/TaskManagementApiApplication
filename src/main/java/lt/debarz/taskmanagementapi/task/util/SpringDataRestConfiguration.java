@@ -1,12 +1,13 @@
 package lt.debarz.taskmanagementapi.task.util;
 
 import lt.debarz.taskmanagementapi.task.entity.Task;
+import lt.debarz.taskmanagementapi.user.entity.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
-
 
 @Configuration
 public class SpringDataRestConfiguration {
@@ -14,7 +15,6 @@ public class SpringDataRestConfiguration {
     @Bean
     public RepresentationModelProcessor<EntityModel<Task>> taskProcessor (EntityLinks links){
         return new RepresentationModelProcessor<EntityModel<Task>>(){
-
             @Override
             public EntityModel<Task> process(EntityModel<Task> model) {
                 model.add(
@@ -54,4 +54,18 @@ public class SpringDataRestConfiguration {
             }
         };
     }
+//    @Bean
+//    public RepresentationModelProcessor<EntityModel<User>> userProcessor (EntityLinks links){
+//        return new RepresentationModelProcessor<EntityModel<User>>(){
+//            @Override
+//            public EntityModel<User> process(EntityModel<User> model) {
+//                model.add(
+//                        links.linkFor(User.class)
+//                                .slash("login")
+//                                .withRel("login")
+//                );
+//                return model;
+//            }
+//        };
+//    }
 }

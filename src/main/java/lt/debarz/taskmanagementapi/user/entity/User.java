@@ -46,6 +46,7 @@ public class User implements UserDetails, Serializable {
     @Column(nullable = false)
     @NotBlank
     @Size(min=3, max=254)
+    @RestResource(exported = false)
     @JsonView(value = {View.UserView.Internal.Post.class, View.UserView.Internal.PUT.class,
             View.UserView.Internal.Patch.class})
     private String password;
@@ -60,12 +61,12 @@ public class User implements UserDetails, Serializable {
     private String phone;
 
     @JsonView(value = {View.UserView.External.class, View.UserView.Internal.class})
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "assignee")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "assignee")
     private List<Task> tasks = new ArrayList<>();
 
-    @JsonView(value = {View.UserView.External.class, View.UserView.Internal.Post.class,
-            View.UserView.Internal.PUT.class, View.UserView.Internal.Patch.class})
-    @ManyToMany(cascade = CascadeType.PERSIST)
+//    @JsonView(value = {View.UserView.External.class, View.UserView.Internal.Post.class,
+//            View.UserView.Internal.PUT.class, View.UserView.Internal.Patch.class})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(
             name="User_Roles",
             joinColumns = { @JoinColumn(name = "user_id") },

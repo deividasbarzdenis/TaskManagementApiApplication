@@ -2,7 +2,6 @@ package lt.debarz.taskmanagementapi.task.service;
 
 import lombok.AllArgsConstructor;
 import lt.debarz.taskmanagementapi.task.exception.EntityNotFoundException;
-import lt.debarz.taskmanagementapi.task.mapper.TaskMapperImpl;
 import lt.debarz.taskmanagementapi.task.entity.Status;
 import lt.debarz.taskmanagementapi.task.entity.Task;
 import lt.debarz.taskmanagementapi.task.model.TaskModel;
@@ -27,8 +26,6 @@ import java.util.stream.Collectors;
 public class TaskService {
 
     private final TaskRepository taskRepository;
-    private final TaskMapperImpl taskMapper;
-
 
     /**
      * get tasks by user
